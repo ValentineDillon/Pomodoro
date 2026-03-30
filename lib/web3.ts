@@ -15,9 +15,15 @@ export const pomodoroAbi = [
   { type: "function", name: "sessions", stateMutability: "view", inputs: [{ name: "", type: "address" }], outputs: [{ type: "uint256" }, { type: "bool" }] }
 ] as const
 
-export const DATA_SUFFIX = Attribution.toDataSuffix({
-  codes: ["BUILDER_CODE_PLACEHOLDER"]
+export const BUILDER_CODE = "bc_hu6egkh4"
+export const ENCODED_DATA_SUFFIX = "0x62635f68753665676b68340b0080218021802180218021802180218021"
+
+const generatedDataSuffix = Attribution.toDataSuffix({
+  codes: [BUILDER_CODE]
 })
+
+export const DATA_SUFFIX =
+  generatedDataSuffix.toLowerCase() === ENCODED_DATA_SUFFIX.toLowerCase() ? generatedDataSuffix : ENCODED_DATA_SUFFIX
 
 export const wagmiConfig = createConfig({
   chains: [base],
